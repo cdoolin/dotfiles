@@ -1,0 +1,9 @@
+i3pyblocks
+dbus-next
+aiohttp
+i3ipc
+inotify
+psutil
+pulsectl
+aiofiles
+
