@@ -29,7 +29,7 @@ if test -f ~/.nvm/nvm.sh
         bass source ~/.nvm/nvm.sh --no-use ';' nvm $argv
     end
 
-    nvm use default
+    nvm use default > /dev/null
 end
 
 if type -q starship
