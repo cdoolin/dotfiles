@@ -130,9 +130,13 @@ return {
   },
   {
     'NeogitOrg/neogit',
-    dependencies = 'nvim-lua/plenary.nvim',
+    dependencies = {
+      'nvim-lua/plenary.nvim',
+      'sindrets/diffview.nvim',
+    },
     config = function(_, _)
       local neogit = require('neogit')
+      neogit.setup {}
       vim.keymap.set("n", "<leader>gs", function() neogit.open() end, { desc = '[G]it [S]tatus (Neogit)' })
     end
 
