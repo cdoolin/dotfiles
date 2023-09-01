@@ -24,6 +24,14 @@ if test -d ~/bin
     fish_add_path --path ~/bin
 end
 
+if test -f ~/.nvm/nvm.sh
+    function nvm
+        bass source ~/.nvm/nvm.sh --no-use ';' nvm $argv
+    end
+
+    nvm use default
+end
+
 if type -q starship
     starship init fish | source
 end
