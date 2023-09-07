@@ -24,6 +24,11 @@ if test -d ~/bin
     fish_add_path --path ~/bin
 end
 
+if test -d ~/.fly
+    set -gx FLYCTL_INSTALL ~/.fly
+    fish_add_path --path ~/.fly/bin
+end
+
 if test -f ~/.nvm/nvm.sh
     function nvm
         bass source ~/.nvm/nvm.sh --no-use ';' nvm $argv
