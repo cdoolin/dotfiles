@@ -40,14 +40,19 @@ end
 return {
     {
         "nvim-telescope/telescope.nvim",
-        tag = '0.1.2',
-        dependencies = { 'nvim-lua/plenary.nvim', "debugloop/telescope-undo.nvim", },
+        tag = '0.1.3',
+        dependencies = {
+            'nvim-lua/plenary.nvim',
+            "debugloop/telescope-undo.nvim",
+            "nvim-telescope/telescope-fzf-native.nvim",
+        },
         config = config,
     },
-    "nvim-telescope/telescope-file-browser.nvim",
-    "nvim-telescope/telescope-hop.nvim",
-    "nvim-telescope/telescope-ui-select.nvim",
+    -- "nvim-telescope/telescope-file-browser.nvim",
+    -- "nvim-telescope/telescope-hop.nvim",
+    -- "nvim-telescope/telescope-ui-select.nvim",
     { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+
     -- {
     --     "AckslD/nvim-neoclip.lua",
     --     config = function()
