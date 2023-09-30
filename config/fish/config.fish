@@ -7,6 +7,13 @@ if type -q batcat
     alias bat batcat
 end
 
+if type -q lsd
+    alias ls lsd
+    alias l "lsd -lAh"
+    alias la "lsd -lAh"
+    alias ll "lsd -lh"
+end
+
 set -gx LESS "-FRX"
 
 alias tf "tmux-sessionizer"
