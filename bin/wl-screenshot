@@ -1,0 +1,7 @@
+#!/bin/bash
+
+TIMESTAMP=$(date "+%Y-%m-%d_%H%M%S")
+FN=~/Pictures/${TIMESTAMP}.png
+
+grim -g "$(slurp)" "$FN"
+wl-copy < $FN
