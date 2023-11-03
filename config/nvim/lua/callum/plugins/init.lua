@@ -2,7 +2,7 @@ return {
   "sainnhe/everforest",
   'tpope/vim-sleuth',
   "nvim-tree/nvim-web-devicons",
-  "vimpostor/vim-lumen",
+  -- "vimpostor/vim-lumen",
   "christoomey/vim-tmux-navigator",
 
   { 'folke/which-key.nvim',      opts = {} },
