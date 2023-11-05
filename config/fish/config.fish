@@ -1,7 +1,4 @@
 
-if test -d ~/.venv/venv
-    source ~/.venv/venv/bin/activate.fish
-end
 
 if type -q batcat
     alias bat batcat
@@ -48,3 +45,7 @@ if type -q starship
     starship init fish | source
 end
 
+set -gx VIRTUAL_ENV_DISABLE_PROMPT "true"
+if test -d ~/.venv/venv
+    source ~/.venv/venv/bin/activate.fish
+end
