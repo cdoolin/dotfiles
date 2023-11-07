@@ -1,3 +1,4 @@
+# zmodload zsh/zprof
 
 if which > /dev/null; then
     alias bat='batcat'
@@ -25,7 +26,9 @@ if [ -d  ~/.fly ]; then
     export PATH="$FLYCTL_INSTALL/bin:$PATH"    
 fi
 
-if [ -f ~/.nvm/nvm.sh ]; then
+if which fnm > /dev/null; then
+    eval "$(fnm env --use-on-cd)"
+elif [ -f ~/.nvm/nvm.sh ]; then
     source ~/.nvm/nvm.sh
     source ~/.nvm/bash_completion
 fi
@@ -55,3 +58,4 @@ function ssh-wa() {
     ssh "$1" -L 5173:localhost:5173 -L 41327:localhost:41327
 }
 
+# zprof
