@@ -1,4 +1,9 @@
 
+# Bug where _OLD_VIRTUAL_PATH gets set to 
+# default path when tmux launches new shell
+if test -n "$_OLD_VIRTUAL_PATH"
+    set -e _OLD_VIRTUAL_PATH
+end
 
 if type -q batcat
     alias bat batcat
