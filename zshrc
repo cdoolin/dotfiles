@@ -1,5 +1,9 @@
 # zmodload zsh/zprof
 
+if [ -e /etc/zsh_command_not_found ]; then
+    source /etc/zsh_command_not_found
+fi
+
 if which > /dev/null; then
     alias bat='batcat'
 fi
