@@ -1,5 +1,22 @@
 # zmodload zsh/zprof
 
+# refresh tmux session env variables
+if [ -n "$TMUX" ]; then                                                                               
+  function refresh {                                                                                
+    export DISPLAY="$(tmux show-env | sed -n 's/^DISPLAY=//p')"
+    export SSH_CONNECTION="$(tmux show-env | sed -n 's/^SSH_CONNECTION=//p')"
+    # export "$(tmux show-environment | grep "^SSH_AUTH_SOCK")"
+    # export "$(tmux show-environment | grep "^SSH_CONNECTION")"
+    # export "$(tmux show-environment | grep "^DISPLAY")"
+  }                                                                                                 
+else                                                                                                  
+  function refresh { }                                                                              
+fi
+
+function preexec() {
+    refresh
+}
+
 if which > /dev/null; then
     alias bat='batcat'
 fi
@@ -43,7 +60,7 @@ alias tf="tmux-sessionizer"
 
 # prevent systemd clearing tmux sessions on logout
 if ps -C systemd > /dev/null; then
-    alias tmux='systemd-run --scope --user tmux'
+    alias tmux='systemd-run --quiet --scope --user tmux'
 fi
 
 if which starship > /dev/null; then
