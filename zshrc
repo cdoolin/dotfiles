@@ -4,7 +4,7 @@ if [ -e /etc/zsh_command_not_found ]; then
     source /etc/zsh_command_not_found
 fi
 
-if which > /dev/null; then
+if which catbat > /dev/null; then
     alias bat='batcat'
 fi
 
@@ -57,9 +57,5 @@ fi
 if [ -d ~/.venv/venv ]; then
     source ~/.venv/venv/bin/activate
 fi
-
-function ssh-wa() {
-    ssh "$1" -L 5173:localhost:5173 -L 41327:localhost:41327
-}
 
 # zprof
