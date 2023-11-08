@@ -3,8 +3,8 @@
 # refresh tmux session env variables
 if [ -n "$TMUX" ]; then                                                                               
   function refresh {                                                                                
-    export DISPLAY="$(tmux show-env | sed -n 's/^DISPLAY=//p')"
-    export SSH_CONNECTION="$(tmux show-env | sed -n 's/^SSH_CONNECTION=//p')"
+    export DISPLAY="$(/usr/bin/tmux show-env | sed -n 's/^DISPLAY=//p')"
+    export SSH_CONNECTION="$(/usr/bin/tmux show-env | sed -n 's/^SSH_CONNECTION=//p')"
   }                                                                                                 
 else                                                                                                  
   function refresh { }                                                                              
