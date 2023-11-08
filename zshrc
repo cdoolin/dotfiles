@@ -5,9 +5,6 @@ if [ -n "$TMUX" ]; then
   function refresh {                                                                                
     export DISPLAY="$(tmux show-env | sed -n 's/^DISPLAY=//p')"
     export SSH_CONNECTION="$(tmux show-env | sed -n 's/^SSH_CONNECTION=//p')"
-    # export "$(tmux show-environment | grep "^SSH_AUTH_SOCK")"
-    # export "$(tmux show-environment | grep "^SSH_CONNECTION")"
-    # export "$(tmux show-environment | grep "^DISPLAY")"
   }                                                                                                 
 else                                                                                                  
   function refresh { }                                                                              
@@ -17,7 +14,11 @@ function preexec() {
     refresh
 }
 
-if which > /dev/null; then
+if [ -e /etc/zsh_command_not_found ]; then
+    source /etc/zsh_command_not_found
+fi
+
+if which batcat > /dev/null; then
     alias bat='batcat'
 fi
 
@@ -70,9 +71,5 @@ fi
 if [ -d ~/.venv/venv ]; then
     source ~/.venv/venv/bin/activate
 fi
-
-function ssh-wa() {
-    ssh "$1" -L 5173:localhost:5173 -L 41327:localhost:41327
-}
 
 # zprof
