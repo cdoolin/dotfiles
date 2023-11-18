@@ -14,8 +14,14 @@ function preexec() {
     refresh
 }
 
+# ubuntu command-not-found utility
 if [ -e /etc/zsh_command_not_found ]; then
     source /etc/zsh_command_not_found
+fi
+
+# stm32cubeide
+if [ -s ~/stm32cubeide/stm32cubeide ]; then
+    export PATH="$HOME/stm32cubeide:$PATH"
 fi
 
 if which batcat > /dev/null; then
