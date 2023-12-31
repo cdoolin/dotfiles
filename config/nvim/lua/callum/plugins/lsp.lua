@@ -1,6 +1,3 @@
--- [[ Configure LSP ]]
---  This function gets run when an LSP connects to a particular buffer.
-
 local augroup_format = vim.api.nvim_create_augroup("custom-lsp-format", { clear = true })
 
 local on_attach = function(_, bufnr)
@@ -89,42 +86,69 @@ local servers = {
   },
 }
 
--- Setup neovim lua configuration
-require('neodev').setup()
+local config_lsp = function(_, _)
+  -- nvim-cmp supports additional completion capabilities, so broadcast that to servers
+  local capabilities = vim.lsp.protocol.make_client_capabilities()
+  capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 
--- nvim-cmp supports additional completion capabilities, so broadcast that to servers
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
+  -- Ensure the servers above are installed
+  local mason_lspconfig = require('mason-lspconfig')
 
--- Ensure the servers above are installed
-local mason_lspconfig = require('mason-lspconfig')
-
-mason_lspconfig.setup {
-  ensure_installed = vim.tbl_keys(servers),
-}
-
-mason_lspconfig.setup_handlers {
-  function(server_name)
-    require('lspconfig')[server_name].setup {
-      capabilities = capabilities,
-      on_attach = on_attach,
-      settings = servers[server_name],
-    }
-  end,
-}
-
-vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
-  vim.lsp.diagnostic.on_publish_diagnostics, {
-    virtual_text = {
-      severity_limit = "Warning",
-    },
+  mason_lspconfig.setup {
+    ensure_installed = vim.tbl_keys(servers),
   }
-)
 
-require("null-ls").setup {
-  sources = {
-    require("null-ls").builtins.formatting.prettierd,
-    -- require("null-ls").builtins.formatting.isort,
-    require("null-ls").builtins.formatting.black,
+  mason_lspconfig.setup_handlers {
+    function(server_name)
+      require('lspconfig')[server_name].setup {
+        capabilities = capabilities,
+        on_attach = on_attach,
+        settings = servers[server_name],
+      }
+    end,
+  }
+
+  vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
+    vim.lsp.diagnostic.on_publish_diagnostics, {
+      virtual_text = {
+        severity_limit = "Warning",
+      },
+    }
+  )
+end
+
+return {
+  {
+    'neovim/nvim-lspconfig',
+    dependencies = {
+      { 'williamboman/mason.nvim', config = true },
+      'williamboman/mason-lspconfig.nvim',
+
+      -- Useful status updates for LSP
+      { 'j-hui/fidget.nvim',       tag = "v1.1.0", opts = {} },
+
+      -- Additional lua configuration, makes nvim stuff amazing!
+      { 'folke/neodev.nvim',       config = true },
+
+      -- main config in completion.lua
+      "hrsh7th/nvim-cmp",
+    },
+    config = config_lsp,
   },
+
+  {
+    'jose-elias-alvarez/null-ls.nvim',
+    config = function(_, opts)
+      require("null-ls").setup {
+        sources = {
+          require("null-ls").builtins.formatting.prettierd,
+          -- require("null-ls").builtins.formatting.isort,
+          require("null-ls").builtins.formatting.black,
+        },
+      }
+    end,
+  },
+
+  -- Fix unsupported color schemes
+  { 'folke/lsp-colors.nvim', opts = {} },
 }

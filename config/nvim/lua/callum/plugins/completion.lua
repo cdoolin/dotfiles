@@ -1,8 +1,8 @@
 local config = function(_, opt)
   local cmp = require 'cmp'
-  local luasnip = require 'luasnip'
-  require('luasnip.loaders.from_vscode').lazy_load()
-  luasnip.config.setup {}
+  -- local luasnip = require 'luasnip'
+  -- require('luasnip.loaders.from_vscode').lazy_load()
+  -- luasnip.config.setup {}
 
   cmp.setup {
     snippet = {
@@ -37,8 +37,8 @@ local config = function(_, opt)
     },
     sources = {
       { name = 'nvim_lsp' },
-      { name = 'luasnip' },
-      { name = 'copilot' },
+      -- { name = 'luasnip' },
+      -- { name = 'copilot' },
       { name = "buffer",  keyword_length = 5 },
     },
     experimental = {
@@ -57,7 +57,7 @@ return {
       "hrsh7th/cmp-nvim-lua",
       "hrsh7th/cmp-nvim-lsp",
       "onsails/lspkind-nvim",
-      "saadparwaiz1/cmp_luasnip",
+      -- "saadparwaiz1/cmp_luasnip",
     }
   },
   {
@@ -72,8 +72,17 @@ return {
       vim.api.nvim_set_hl(0, "CmpItemKindCopilot", { fg = "#6CC644" })
     end,
   },
-  { "saadparwaiz1/cmp_luasnip", dependencies = { "L3MON4D3/LuaSnip" } },
-  -- { "github/copilot.vim" },
+  {
+    'github/copilot.vim',
+
+    config = function(_, _)
+      vim.keymap.set("n", "<leader>ce", ":Copilot enable<CR>", { desc = '[C]opilot [E]nable' })
+      vim.keymap.set("n", "<leader>cd", ":Copilot disable<CR>", { desc = '[C]opilot [D]isable' })
+      vim.keymap.set("n", "<leader>cs", ":Copilot status<CR>", { desc = '[C]opilot [S]tatus' })
+      vim.keymap.set("n", "<leader>cp", ":Copilot panel<CR>", { desc = '[C]opilot [P]anel' })
+    end
+  },
+  -- { "saadparwaiz1/cmp_luasnip", dependencies = { "L3MON4D3/LuaSnip" } },
 
   -- {
   --   "zbirenbaum/copilot.lua",

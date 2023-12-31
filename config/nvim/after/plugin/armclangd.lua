@@ -6,6 +6,7 @@ end
 
 function ArmClangd()
 	vim.cmd("LspStop")
+
 	require("lspconfig").clangd.setup({
 		cmd = {
 			"/home/callum/.local/share/nvim/mason/bin/clangd",
