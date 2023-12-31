@@ -5,25 +5,42 @@ return {
   -- "vimpostor/vim-lumen",
   "christoomey/vim-tmux-navigator",
 
-  { 'folke/which-key.nvim',      opts = {} },
+  { 'folke/which-key.nvim', opts = {} },
 
-  { 'nvim-lualine/lualine.nvim', opts = {} },
+  {
+    'nvim-lualine/lualine.nvim',
+    event = "VeryLazy",
+    opts = {}
+  },
 
   {
     'numToStr/Comment.nvim',
+    keys = { '<leader>gc', 'gcc' },
+
     opts = {},
     config = function(_, opts)
       require('Comment').setup {
         pre_hook = require('ts_context_commentstring.integrations.comment_nvim').create_pre_hook(),
       }
     end,
-    dependencies = { 'nvim-treesitter/nvim-treesitter' }
+    dependencies = {
+      'nvim-treesitter/nvim-treesitter',
+      'JoosepAlviste/nvim-ts-context-commentstring',
+    }
+  },
+  {
+    'JoosepAlviste/nvim-ts-context-commentstring',
+    lazy = true,
+    opts = {
+      enable_autocmd = false,
+    },
   },
 
   {
     -- Add indentation guides even on blank lines
     'lukas-reineke/indent-blankline.nvim',
     main = "ibl",
+    event = "BufAdd",
     opts = {
     },
   },
@@ -31,21 +48,31 @@ return {
   {
     "nvim-neo-tree/neo-tree.nvim",
     branch = "v2.x",
+    keys = {
+      {
+        "<leader>pf", ":Neotree filesystem reveal toggle float<CR>", desc = '[P]roject [F]loat filesystem browser'
+      },
+      {
+        "<leader>pt", ":Neotree filesystem reveal toggle left<CR>", desc = '[P]roject [T]ree',
+      }
+    },
     dependencies = {
       "nvim-lua/plenary.nvim",
       "nvim-telescope/telescope.nvim",
       "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
       "MunifTanjim/nui.nvim",
     },
-    config = function(_, _)
-      vim.keymap.set("n", "<leader>pf", ":Neotree filesystem reveal toggle float<CR>",
-        { desc = '[P]roject [F]loat filesystem browser' })
-      vim.keymap.set("n", "<leader>pt", ":Neotree filesystem reveal toggle left<CR>", { desc = '[P]roject [T]ree' })
-    end,
+    opts = {},
+    -- config = function(_, _)
+    --   vim.keymap.set("n", "<leader>pf", ":Neotree filesystem reveal toggle float<CR>",
+    --     { desc = '[P]roject [F]loat filesystem browser' })
+    --   vim.keymap.set("n", "<leader>pt", ":Neotree filesystem reveal toggle left<CR>", { desc = '[P]roject [T]ree' })
+    -- end,
   },
 
   {
     "folke/trouble.nvim",
+    cmd = { "TroubleToggle", "Trouble" },
     opts = {},
   },
 
@@ -57,10 +84,12 @@ return {
   },
   {
     'windwp/nvim-ts-autotag',
+    ft = { 'javascript', 'javascriptreact', 'typescript', 'typescriptreact' },
     opts = {},
   },
   {
     'akinsho/bufferline.nvim',
+    event = "VeryLazy",
     dependencies = 'nvim-tree/nvim-web-devicons',
     version = "*",
     opts = {
@@ -90,6 +119,7 @@ return {
   -- },
   {
     'lewis6991/satellite.nvim',
+    event = "VeryLazy",
     opts = {
       winblend = 20,
     }

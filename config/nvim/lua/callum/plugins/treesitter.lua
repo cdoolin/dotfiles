@@ -3,7 +3,7 @@ local config = function(_, opts)
     -- A list of parser names, or "all" (the five listed parsers should always be installed)
     ensure_installed = {
       "javascript", "typescript", "tsx", "python", "c", "lua",
-      "vim", "vimdoc", "rust", "glsl", "toml", "yaml"
+      "vim", "vimdoc", "rust", "glsl", "toml", "yaml", "query",
     },
 
     -- Install parsers synchronously (only applied to `ensure_installed`)
@@ -97,6 +97,7 @@ return {
   {
     -- Highlight, edit, and navigate code
     'nvim-treesitter/nvim-treesitter',
+    event = "VeryLazy",
     dependencies = {
       'nvim-treesitter/nvim-treesitter-textobjects',
       'JoosepAlviste/nvim-ts-context-commentstring',
@@ -104,5 +105,8 @@ return {
     config = config,
     -- build = ':TSUpdateSync',
   },
-  'nvim-treesitter/playground',
+  {
+    'nvim-treesitter/playground',
+    cmd = 'TSPlaygroundToggle',
+  },
 }

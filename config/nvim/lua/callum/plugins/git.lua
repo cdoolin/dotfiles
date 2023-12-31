@@ -2,6 +2,7 @@ return {
 
   {
     'NeogitOrg/neogit',
+    keys = { '<leader>gs' },
     dependencies = {
       'nvim-lua/plenary.nvim',
       'sindrets/diffview.nvim',
@@ -17,6 +18,7 @@ return {
   {
     -- Adds git releated signs to the gutter, as well as utilities for managing changes
     'lewis6991/gitsigns.nvim',
+    event = 'BufEnter',
     opts = {
       -- See `:help gitsigns.txt`
       signs = {

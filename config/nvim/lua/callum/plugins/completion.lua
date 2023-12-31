@@ -5,11 +5,11 @@ local config = function(_, opt)
   -- luasnip.config.setup {}
 
   cmp.setup {
-    snippet = {
-      expand = function(args)
-        luasnip.lsp_expand(args.body)
-      end,
-    },
+    -- snippet = {
+    --   expand = function(args)
+    --     luasnip.lsp_expand(args.body)
+    --   end,
+    -- },
     mapping = cmp.mapping.preset.insert {
       ['<C-n>'] = cmp.mapping.select_next_item(),
       ['<C-p>'] = cmp.mapping.select_prev_item(),
@@ -50,6 +50,7 @@ end
 return {
   {
     "hrsh7th/nvim-cmp",
+    event = "InsertEnter",
     config = config,
     dependencies = {
       "hrsh7th/cmp-buffer",
@@ -62,6 +63,7 @@ return {
   },
   {
     "onsails/lspkind-nvim",
+    lazy = true,
     config = function()
       local lspkind = require('lspkind')
       lspkind.init({
@@ -74,6 +76,7 @@ return {
   },
   {
     'github/copilot.vim',
+    event = "InsertEnter",
 
     config = function(_, _)
       vim.keymap.set("n", "<leader>ce", ":Copilot enable<CR>", { desc = '[C]opilot [E]nable' })

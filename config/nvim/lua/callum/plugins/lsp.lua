@@ -1,4 +1,4 @@
-local augroup_format = vim.api.nvim_create_augroup("custom-lsp-format", { clear = true })
+-- local augroup_format = vim.api.nvim_create_augroup("custom-lsp-format", { clear = true })
 
 local on_attach = function(_, bufnr)
   local telescope = require('telescope.builtin')
@@ -40,27 +40,27 @@ local on_attach = function(_, bufnr)
     print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
   end, { buffer = bufnr, desc = '[W]orkspace [L]ist Folders' })
 
-  local filter = function(client)
-    return client ~= "tsserver"
-  end
+  -- local filter = function(client)
+  --   return client ~= "tsserver"
+  -- end
+  --
+  -- local format = function()
+  --   vim.lsp.buf.format { filter = filter }
+  -- end
 
-  local format = function()
-    vim.lsp.buf.format { filter = filter }
-  end
-
-  vim.api.nvim_clear_autocmds { buffer = bufnr, group = augroup_format }
-  vim.api.nvim_create_autocmd("BufWritePre", {
-    buffer = bufnr,
-    callback = format,
-  })
+  -- vim.api.nvim_clear_autocmds { buffer = bufnr, group = augroup_format }
+  -- vim.api.nvim_create_autocmd("BufWritePre", {
+  --   buffer = bufnr,
+  --   callback = format,
+  -- })
 
   -- Create a command `:Format` local to the LSP buffer
-  vim.api.nvim_buf_create_user_command(
-    bufnr,
-    'Format',
-    format,
-    { desc = 'Format current buffer with LSP' }
-  )
+  -- vim.api.nvim_buf_create_user_command(
+  --   bufnr,
+  --   'Format',
+  --   format,
+  --   { desc = 'Format current buffer with LSP' }
+  -- )
 end
 
 -- Enable the following language servers
@@ -120,6 +120,8 @@ end
 return {
   {
     'neovim/nvim-lspconfig',
+    event = "VeryLazy",
+
     dependencies = {
       { 'williamboman/mason.nvim', config = true },
       'williamboman/mason-lspconfig.nvim',
@@ -131,23 +133,23 @@ return {
       { 'folke/neodev.nvim',       config = true },
 
       -- main config in completion.lua
-      "hrsh7th/nvim-cmp",
+      "hrsh7th/cmp-nvim-lsp",
     },
     config = config_lsp,
   },
 
-  {
-    'jose-elias-alvarez/null-ls.nvim',
-    config = function(_, opts)
-      require("null-ls").setup {
-        sources = {
-          require("null-ls").builtins.formatting.prettierd,
-          -- require("null-ls").builtins.formatting.isort,
-          require("null-ls").builtins.formatting.black,
-        },
-      }
-    end,
-  },
+  -- {
+  --   'jose-elias-alvarez/null-ls.nvim',
+  --   config = function(_, opts)
+  --     require("null-ls").setup {
+  --       sources = {
+  --         require("null-ls").builtins.formatting.prettierd,
+  --         -- require("null-ls").builtins.formatting.isort,
+  --         require("null-ls").builtins.formatting.black,
+  --       },
+  --     }
+  --   end,
+  -- },
 
   -- Fix unsupported color schemes
   { 'folke/lsp-colors.nvim', opts = {} },
