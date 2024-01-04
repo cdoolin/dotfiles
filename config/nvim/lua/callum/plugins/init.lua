@@ -15,7 +15,8 @@ return {
 
   {
     'numToStr/Comment.nvim',
-    keys = { '<leader>gc', 'gcc' },
+    -- keys = { '<leader>gc', 'gcc' },
+    event = "VeryLazy",
 
     opts = {},
     config = function(_, opts)
