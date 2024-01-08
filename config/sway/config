@@ -227,6 +227,7 @@ bindsym $mod+r mode "resize"
 include ~/.config/sway/$(hostname)/config
 
 include /etc/sway/config.d/*
+# exec ~/bin/fix-desktop-portal-wlr
 
 exec_always ~/.config/waybar/waybar.sh
 exec dex --autostart --environment sway
