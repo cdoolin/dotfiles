@@ -232,3 +232,4 @@ include /etc/sway/config.d/*
 
 exec_always ~/.config/waybar/waybar.sh
 exec dex --autostart --environment sway
+exec_always "pkill kanshi; kanshi"
