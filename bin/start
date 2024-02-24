@@ -1,0 +1,3 @@
+#!/bin/bash
+
+setsid /bin/sh -c "$*" >&/dev/null </dev/null &
