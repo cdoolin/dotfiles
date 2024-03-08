@@ -45,6 +45,11 @@ if which lsd > /dev/null; then
     alias ll='lsd -lh'
 fi
 
+
+if [ -d ~/go/bin ]; then
+    export PATH="$HOME/go/bin:$PATH"
+fi
+
 if [ -d  ~/.fly ]; then
     export FLYCTL_INSTALL="${HOME}/.fly"                                       
     export PATH="$FLYCTL_INSTALL/bin:$PATH"    
