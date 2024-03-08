@@ -4,6 +4,7 @@ local config = function(_, opts)
     ensure_installed = {
       "javascript", "typescript", "tsx", "python", "c", "lua",
       "vim", "vimdoc", "rust", "glsl", "toml", "yaml", "query",
+      "markdown", "markdown_inline",
     },
 
     -- Install parsers synchronously (only applied to `ensure_installed`)

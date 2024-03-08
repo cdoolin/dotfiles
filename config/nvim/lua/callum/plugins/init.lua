@@ -1,5 +1,7 @@
 return {
+  -- color theme
   "sainnhe/everforest",
+
   'tpope/vim-sleuth',
   "nvim-tree/nvim-web-devicons",
   -- "vimpostor/vim-lumen",

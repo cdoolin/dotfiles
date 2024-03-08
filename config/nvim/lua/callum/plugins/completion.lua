@@ -74,31 +74,4 @@ return {
       vim.api.nvim_set_hl(0, "CmpItemKindCopilot", { fg = "#6CC644" })
     end,
   },
-  {
-    'github/copilot.vim',
-    event = "InsertEnter",
-
-    config = function(_, _)
-      vim.keymap.set("n", "<leader>ce", ":Copilot enable<CR>", { desc = '[C]opilot [E]nable' })
-      vim.keymap.set("n", "<leader>cd", ":Copilot disable<CR>", { desc = '[C]opilot [D]isable' })
-      vim.keymap.set("n", "<leader>cs", ":Copilot status<CR>", { desc = '[C]opilot [S]tatus' })
-      vim.keymap.set("n", "<leader>cp", ":Copilot panel<CR>", { desc = '[C]opilot [P]anel' })
-    end
-  },
-  -- { "saadparwaiz1/cmp_luasnip", dependencies = { "L3MON4D3/LuaSnip" } },
-
-  -- {
-  --   "zbirenbaum/copilot.lua",
-  --   config = function()
-  --     require("copilot").setup()
-  --   end,
-  -- },
-  -- {
-  --   "zbirenbaum/copilot-cmp",
-  --   config = function()
-  --     require("copilot_cmp").setup()
-  --   end,
-  -- },
-
-
 }
