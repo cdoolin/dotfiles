@@ -1,5 +1,7 @@
 # zmodload zsh/zprof
 
+alias stm32ide-activate='source ~/bin/stm32ide-activate'
+
 # refresh tmux session env variables
 if [ -n "$TMUX" ]; then                                                                               
   function refresh {                                                                                
