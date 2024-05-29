@@ -14,6 +14,8 @@ local config = function(_, opts)
     -- Recommendation: set to false if you don't have `tree-sitter` CLI installed locally
     auto_install = true,
 
+    ignore_install = {},
+
     highlight = {
       enable = true,
 
