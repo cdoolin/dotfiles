@@ -1,0 +1,4 @@
+#!/bin/bash
+
+echo Inhibiting sleep for 1h
+systemd-inhibit --what=handle-lid-switch sleep 1h
