@@ -72,6 +72,8 @@ bindsym $mod+Shift+c reload
 bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
 bindsym $mod+n exec ~/.config/sway/backlight.sh 3000
 bindsym $mod+m exec ~/.config/sway/backlight.sh 4500
+bindsym $mod+z exec swaylock
+
 #
 # Moving around:
 #
@@ -96,6 +98,7 @@ bindsym $mod+Shift+Left move left
 bindsym $mod+Shift+Down move down
 bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
+
 
 
 #
