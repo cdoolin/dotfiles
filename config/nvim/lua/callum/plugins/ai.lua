@@ -72,7 +72,7 @@ return {
 
       require("gp").setup({
         openai_api_key = { "cat", home .. "/.openai_api_key" },
-        whisper_rec_cmd = { "arecord", "-c", "1", "-f", "S16_LE", "-r", "48000", "-d", "3600", "rec.wav" },
+        -- whisper_rec_cmd = { "arecord", "-c", "1", "-f", "S16_LE", "-r", "48000", "-d", "3600", "rec.wav" },
       })
     end,
   }
