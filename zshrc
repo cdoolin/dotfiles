@@ -68,6 +68,10 @@ if [ -d ~/bin ]; then
     export PATH="$HOME/bin:$PATH"
 fi
 
+if [ -d ~/apps ]; then
+    export PATH="$HOME/apps:$PATH"
+fi
+
 # fix git branch paging
 export LESS=-FRX
 alias tf="tmux-sessionizer"
