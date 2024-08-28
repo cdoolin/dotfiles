@@ -85,8 +85,9 @@ if which starship > /dev/null; then
     eval "$(starship init zsh)"
 fi
 
-if [ -d ~/.venv/venv ]; then
-    source ~/.venv/venv/bin/activate
-fi
+alias venv="source ~/.venv/venv/bin/activate"
+# if [ -d ~/.venv/venv ]; then
+#     source ~/.venv/venv/bin/activate
+# fi
 
 # zprof
