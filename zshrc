@@ -64,6 +64,10 @@ elif [ -f ~/.nvm/nvm.sh ]; then
     source ~/.nvm/bash_completion
 fi
 
+if [ -d ~/.local/bin ]; then
+    export PATH="$HOME/.local/bin:$PATH"
+fi
+
 if [ -d ~/bin ]; then
     export PATH="$HOME/bin:$PATH"
 fi
