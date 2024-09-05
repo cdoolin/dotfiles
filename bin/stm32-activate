@@ -37,7 +37,8 @@ else
     # Select the last matching path
     GCC_BIN=$(echo "$GCC_BINS" | tail -n 1)
     GCC_DIR=$(dirname $GCC_BIN)
-    echo Adding to path: $GCC_DIR
+    echo Adding to path:
+    echo $GCC_DIR
     export PATH=$GCC_DIR:$PATH
 fi
 
@@ -47,6 +48,7 @@ else
     # Select the last matching path
     CLI_BIN=$(echo "$CLI_BINS" | tail -n 1)
     CLI_DIR=$(dirname $CLI_BIN)
-    echo Adding to path: $CLI_DIR
+    echo Adding to path:
+    echo $CLI_DIR
     export PATH=$CLI_DIR:$PATH
 fi
