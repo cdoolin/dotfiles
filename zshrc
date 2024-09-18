@@ -89,7 +89,26 @@ if which starship > /dev/null; then
     eval "$(starship init zsh)"
 fi
 
-alias venv="source ~/.venv/venv/bin/activate"
+venv() {
+    source ~/.venv/venv/bin/activate
+}
+
+ipython_check() {
+    ipython_path=$(whence -p ipython)
+
+    if [[ -z "$ipython_path" ]]; then
+        venv
+        ipython_path=$(whence -p ipython)
+
+        if [[ -z "$ipython_path" ]]; then
+            echo "ipython still not found after activating the virtual environment."
+            return 1
+        fi
+    fi
+    "$ipython_path" "$@"
+}
+
+alias ipython=ipython_check
 # if [ -d ~/.venv/venv ]; then
 #     source ~/.venv/venv/bin/activate
 # fi
