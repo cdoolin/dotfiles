@@ -70,8 +70,8 @@ bindsym $mod+Shift+c reload
 
 # Exit sway (logs you out of your Wayland session)
 bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
-bindsym $mod+n exec ~/.config/sway/backlight.sh 3000
-bindsym $mod+m exec ~/.config/sway/backlight.sh 4500
+bindsym $mod+n exec ~/.config/sway/gammarelay-toggle.sh 3000
+bindsym $mod+m exec ~/.config/sway/gammarelay-toggle.sh 4500
 bindsym $mod+z exec swaylock
 
 #
@@ -236,3 +236,5 @@ include /etc/sway/config.d/*
 exec_always ~/.config/waybar/waybar.sh
 exec dex --autostart --environment sway
 exec_always "pkill kanshi; kanshi"
+exec_always "pkill wl-gammarelay-rs; wl-gammarelay-rs"
+
