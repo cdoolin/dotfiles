@@ -233,7 +233,7 @@ include /etc/sway/config.d/*
 # exec ~/bin/fix-desktop-portal-wlr
 
 exec_always ~/.config/waybar/waybar.sh
-exec dex --autostart --environment sway
+exec_always "pkill wl-gammarelay-rs; ~/.cargo/bin/wl-gammarelay-rs"
 exec_always "pkill kanshi; kanshi"
-exec_always "pkill wl-gammarelay-rs; wl-gammarelay-rs"
+exec dex --autostart --environment sway
 
