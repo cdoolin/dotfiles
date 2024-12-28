@@ -1,6 +1,6 @@
 #!/bin/sh
 
 gsettings set org.gnome.desktop.interface color-scheme 'default'
-gsettings set org.gnome.desktop.interface gtk-theme 'Yaru'
+gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita'
 gsettings set org.gnome.desktop.interface icon-theme 'Yaru'
 

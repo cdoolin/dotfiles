@@ -109,6 +109,7 @@ ipython_check() {
 }
 
 alias ipython=ipython_check
+alias pwreset="systemctl --user restart pipewire"
 # if [ -d ~/.venv/venv ]; then
 #     source ~/.venv/venv/bin/activate
 # fi
