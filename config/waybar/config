@@ -3,7 +3,7 @@
     "position": "top",
 
     "modules-left": ["sway/workspaces", "sway/mode", "sway/scratchpad"],
-    "modules-center": ["clock"],
+    "modules-center": ["custom/clock"],
     "modules-right": ["tray", "custom/power", "backlight", "pulseaudio", "network", "memory", "temperature", "battery", "cpu"],
     "sway/mode": {
         "format": " {}"
@@ -22,6 +22,12 @@
     "clock": {
         "format": "{:%a %d %b %H:%M}",
         "tooltip": false
+    },
+    "custom/clock": {
+        "format": "{}",
+        "tooltip": false,
+        "exec": "date +'%a %d %b %H:%M'",
+        "interval": 10
     },
     "battery": {
         "format": "{capacity}% {icon}",
