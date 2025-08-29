@@ -1,3 +1,12 @@
-[window]
-padding = { x = 10, y = 10 }
+[general]
+import = [
+    "~/.config/alacritty/themes/alabaster.toml"
+]
 
+[window]
+padding = { x = 0, y = 0 }
+
+[font]
+normal = { family = "UbuntuMono Nerd Font" }
+size = 14
+offset = { x = 0, y = 1 }
