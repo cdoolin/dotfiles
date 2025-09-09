@@ -111,6 +111,11 @@ ipython_check() {
 alias ipython=ipython_check
 alias pwreset="systemctl --user restart pipewire"
 
+# Start ssh-agent if needed
+if [ -z "$SSH_AUTH_SOCK" ]; then
+  eval "$(ssh-agent -s)" > /dev/null
+fi
+
 # Find the latest Zig version in ~/zig and add it to PATH
 if [ -d "$HOME/zig" ]; then
     LATEST_ZIG=$(ls -d $HOME/zig/zig-linux-x86_64-* | sort -V | tail -n 1)
