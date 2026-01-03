@@ -2,7 +2,7 @@
     "layer": "bottom",
     "position": "top",
 
-    "modules-left": ["sway/workspaces", "sway/mode", "sway/scratchpad"],
+    "modules-left": ["sway/workspaces", "sway/mode", "sway/scratchpad", "custom/tailscale"],
     "modules-center": ["custom/clock"],
     "modules-right": ["tray", "custom/power", "backlight", "pulseaudio", "network", "memory", "temperature", "battery", "cpu"],
     "sway/mode": {
@@ -92,5 +92,12 @@
       "format": "{}W 󱐋",
       "return-type": "",
       "interval": 5
+    },
+    "custom/tailscale": {
+        "format": "{}",
+        "interval": 30,
+        "exec": "~/.config/waybar/tailscale.sh",
+        "return-type": "json", 
+        "tooltip": true
     }
 }
