@@ -62,7 +62,7 @@
             "phone": [" 󰕿", " 󰖀", " 󰕾"],
             "default": ["󰕿", "󰖀", "󰕾"]
         },
-        "scroll-step": 10,
+        "scroll-step": 5,
         "on-click": "pavucontrol",
         "tooltip": false
     },
