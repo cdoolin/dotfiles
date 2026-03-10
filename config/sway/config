@@ -208,6 +208,7 @@ bindsym $mod+r mode "resize"
 
 # Set STM32CubeMX to floating
 for_window [class="STM32CubeMX"] floating enable
+for_window [app_id="^$" title="^$"] floating enable, no_focus
 
 #
 # Status Bar:
