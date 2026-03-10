@@ -1,0 +1,15 @@
+#!/bin/bash
+set -euo pipefail
+
+CURSOR_APPIMAGE="$HOME/apps/cursor.AppImage"
+USER_DATA_DIR="$HOME/.config/Cursor"
+LOGFILE="$HOME/apps/cursor.log"
+
+mkdir -p "$(dirname "$LOGFILE")"
+
+# Detach like your start script, but capture output to a logfile
+setsid /bin/sh -c '
+  app="$1"; userdir="$2"; logfile="$3"; shift 3
+  exec "$app" --user-data-dir "$userdir" "$@" >>"$logfile" 2>&1
+' sh "$CURSOR_APPIMAGE" "$USER_DATA_DIR" "$LOGFILE" "$@" </dev/null &
+
