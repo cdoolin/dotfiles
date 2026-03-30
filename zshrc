@@ -30,14 +30,9 @@ if which batcat > /dev/null; then
     alias bat='batcat'
 fi
 
-if [ -s ~/.config/antigen/antigen.zsh ]; then
-    source ~/.config/antigen/antigen.zsh
-    
-    antigen bundle 'zsh-users/zsh-syntax-highlighting'
-    antigen bundle 'zsh-users/zsh-autosuggestions'
-    antigen bundle 'zsh-users/zsh-completions'
-
-    antigen apply
+if [ -f "${ZDOTDIR:-$HOME}/.antidote/antidote.zsh" ]; then
+    source "${ZDOTDIR:-$HOME}/.antidote/antidote.zsh"
+    antidote load
 fi
 
 if which lsd > /dev/null; then
@@ -108,7 +103,6 @@ ipython_check() {
     "$ipython_path" "$@"
 }
 
-alias ipython=ipython_check
 alias pwreset="systemctl --user restart pipewire"
 
 
@@ -126,3 +120,5 @@ if [ -d "$HOME/zig" ]; then
 fi
 
 # zprof
+
+. "$HOME/.local/bin/env"
