@@ -2,7 +2,7 @@
     "layer": "bottom",
     "position": "top",
 
-    "modules-left": ["sway/workspaces", "sway/mode", "sway/scratchpad", "custom/tailscale"],
+    "modules-left": ["sway/workspaces", "sway/mode", "sway/scratchpad", "custom/tailscale", "custom/wifi_debug"],
     "modules-center": ["custom/clock"],
     "modules-right": ["tray", "custom/power", "backlight", "pulseaudio", "network", "memory", "temperature", "battery", "cpu"],
     "sway/mode": {
@@ -98,6 +98,13 @@
         "interval": 30,
         "exec": "~/.config/waybar/tailscale.sh",
         "return-type": "json", 
+        "tooltip": true
+    },
+    "custom/wifi_debug": {
+        "exec": "~/.config/waybar/wifi_debug.py",
+        "interval": 5,
+        "return-type": "json",
+        "format": " {}",
         "tooltip": true
     }
 }
