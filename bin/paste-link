@@ -1,0 +1,106 @@
+#!/usr/bin/env python3
+"""Format a link from the Wayland clipboard as Markdown."""
+
+from html import unescape
+from html.parser import HTMLParser
+import re
+import shutil
+import subprocess
+import sys
+
+
+class LinkParser(HTMLParser):
+    def __init__(self):
+        super().__init__(convert_charrefs=True)
+        self.href = ""
+        self.title_parts = []
+        self.in_link = False
+
+    def handle_starttag(self, tag, attrs):
+        if self.href or tag.lower() != "a":
+            return
+
+        attrs = dict(attrs)
+        if attrs.get("href"):
+            self.href = attrs["href"]
+            self.in_link = True
+
+    def handle_endtag(self, tag):
+        if tag.lower() == "a":
+            self.in_link = False
+
+    def handle_data(self, data):
+        if self.in_link:
+            self.title_parts.append(data)
+
+    @property
+    def title(self):
+        return " ".join("".join(self.title_parts).split())
+
+
+def die(message):
+    print(f"paste-link: {message}", file=sys.stderr)
+    raise SystemExit(1)
+
+
+def run(*args):
+    try:
+        return subprocess.run(
+            args,
+            check=False,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.DEVNULL,
+            text=True,
+        ).stdout
+    except FileNotFoundError:
+        die(f"{args[0]} is required")
+
+
+def markdown_escape_title(title):
+    return title.replace("\\", "\\\\").replace("]", "\\]")
+
+
+def markdown_escape_href(href):
+    return href.replace(")", "%29")
+
+
+def main():
+    for command in ("wl-paste", "wl-copy"):
+        if not shutil.which(command):
+            die(f"{command} is required")
+
+    mime_types = run("wl-paste", "-l").splitlines()
+    html_type = next((t for t in mime_types if t.startswith("text/html")), "")
+
+    href = ""
+    title = ""
+
+    if html_type:
+        parser = LinkParser()
+        parser.feed(run("wl-paste", "-t", html_type))
+        href = unescape(parser.href).strip()
+        title = parser.title
+
+    plain = run("wl-paste", "-n").replace("\r", "").replace("\n", "")
+    if not href and re.match(r"^https?://\S+$", plain):
+        href = plain
+
+    if not href:
+        die("clipboard does not contain a link")
+
+    if not title or title.startswith(("http://", "https://")):
+        title = href
+
+    markdown = f"[{markdown_escape_title(title)}]({markdown_escape_href(href)})"
+    print(markdown)
+
+    subprocess.run(
+        ("wl-copy",),
+        input=markdown,
+        check=True,
+        text=True,
+    )
+
+
+if __name__ == "__main__":
+    main()

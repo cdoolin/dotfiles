@@ -1,0 +1,9 @@
+#!/bin/bash
+
+for host in pve1 pve2 pve4; do
+
+echo $host
+ssh $host 'arc_summary -g'
+
+done
+

@@ -1,0 +1,46 @@
+#!/usr/bin/env bash
+# Save an image from the Wayland clipboard into the current directory as
+# YYYY-MM-DD_<description>.png, print a markdown link, and copy that link
+# back to the clipboard.
+#
+# Usage: paste-img <description>
+
+set -euo pipefail
+
+if [[ $# -lt 1 ]]; then
+    echo "usage: paste-img <description>" >&2
+    exit 2
+fi
+
+desc="$1"
+# sanitize: spaces -> underscores, strip anything that isn't [A-Za-z0-9._-]
+desc="${desc// /_}"
+desc="$(printf '%s' "$desc" | tr -cd '[:alnum:]._-')"
+if [[ -z "$desc" ]]; then
+    echo "paste-img: description is empty after sanitization" >&2
+    exit 2
+fi
+
+date="$(date +%Y-%m-%d)"
+base="${date}_${desc}"
+ext="png"
+
+# Bail early if the clipboard doesn't hold an image.
+if ! wl-paste -l 2>/dev/null | grep -q '^image/'; then
+    echo "paste-img: clipboard does not contain an image" >&2
+    exit 1
+fi
+
+# Pick a non-colliding filename: base.png, base-1.png, base-2.png, ...
+file="${base}.${ext}"
+n=1
+while [[ -e "$file" ]]; do
+    file="${base}-${n}.${ext}"
+    n=$((n + 1))
+done
+
+wl-paste -t image/png > "$file"
+
+link="![${desc}](${file})"
+printf '%s\n' "$link"
+printf '%s' "$link" | wl-copy
