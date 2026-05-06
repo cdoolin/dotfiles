@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+session="1"
+ssh_args=()
+
+while [[ $# -gt 0 ]]; do
+    case "$1" in
+        -s|--session)
+            if [[ $# -lt 2 ]]; then
+                echo "Error: $1 requires a session name" >&2
+                exit 1
+            fi
+            session="$2"
+            shift 2
+            ;;
+        *)
+            ssh_args+=("$1")
+            shift
+            ;;
+    esac
+done
+
+if [[ ${#ssh_args[@]} -eq 0 ]]; then
+    echo "Usage: tmux-ssh [-s session] [ssh-options] <host>" >&2
+    exit 1
+fi
+session_quoted=$(printf '%q' "$session")
+
+if [[ -n "${TMUX:-}" ]]; then
+    exec ssh -t "${ssh_args[@]}" "TMUX='' tmux new -A -s $session_quoted"
+else
+    exec ssh -t "${ssh_args[@]}" "tmux new -A -s $session_quoted"
+fi
+

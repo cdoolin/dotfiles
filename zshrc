@@ -74,6 +74,7 @@ fi
 # fix git branch paging
 export LESS=-FRX
 alias tf="tmux-sessionizer"
+alias ts="tmux-ssh"
 
 # prevent systemd clearing tmux sessions on logout
 if ps -C systemd > /dev/null; then
