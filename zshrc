@@ -35,6 +35,9 @@ if [ -f "${ZDOTDIR:-$HOME}/.antidote/antidote.zsh" ]; then
     antidote load
 fi
 
+# Complete commands after `start` as if it were not present.
+compdef _precommand start
+
 if which lsd > /dev/null; then
     alias ls='lsd'
     alias l='lsd -lah'
@@ -105,6 +108,7 @@ ipython_check() {
 }
 
 alias pwreset="systemctl --user restart pipewire"
+alias ttn-lw-cli=ttn-lw-stack.ttn-lw-cli
 
 
 # Reuse ssh-agent if available, otherwise start a new one
@@ -123,3 +127,10 @@ fi
 # zprof
 
 . "$HOME/.local/bin/env"
+
+# bun completions
+[ -s "/home/callum/.bun/_bun" ] && source "/home/callum/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"

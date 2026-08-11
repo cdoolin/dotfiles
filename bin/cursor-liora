@@ -1,7 +1,7 @@
 #!/bin/bash
 set -euo pipefail
 
-CURSOR_APPIMAGE="$HOME/apps/cursor.AppImage"
+CURSOR_APPIMAGE="$HOME/apps/Cursor-3.7.27-x86_64.AppImage"
 WORK_USER_DATA_DIR="$HOME/.config/Cursor-liora"
 LOGFILE="$HOME/apps/cursor-liora.log"
 
