@@ -75,7 +75,14 @@ floating_modifier $mod normal
 bindsym $mod+Shift+c reload
 
 # Exit sway (logs you out of your Wayland session)
-bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
+bindsym $mod+Shift+e exec ~/.config/sway/sway-exit-confirm.sh
+
+mode "exit-confirm" {
+    bindsym $mod+Shift+e exit
+    bindsym y exit
+    bindsym Escape exec ~/.config/sway/sway-exit-confirm.sh cancel
+    bindsym n exec ~/.config/sway/sway-exit-confirm.sh cancel
+}
 bindsym $mod+n exec ~/.config/sway/gammarelay-toggle.sh 3000
 bindsym $mod+m exec ~/.config/sway/gammarelay-toggle.sh 4500
 bindsym $mod+z exec swaylock
