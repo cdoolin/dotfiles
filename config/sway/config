@@ -51,9 +51,6 @@ set $term ghostty
 # bindsym $mod+Return exec $term
 bindsym $mod+Return exec $term +new-window
 
-# Open a terminal when the session starts.
-exec $term +new-window
-
 # Kill focused window
 bindsym $mod+Shift+q kill
 
@@ -248,8 +245,7 @@ include ~/.config/sway/$(hostname)/config
 include /etc/sway/config.d/*
 # exec ~/bin/fix-desktop-portal-wlr
 
-exec_always ~/.config/waybar/waybar.sh
+exec ~/.config/sway/session-startup.sh $term
 exec_always "pkill wl-gammarelay-rs; ~/.cargo/bin/wl-gammarelay-rs"
 exec_always "pkill kanshi; kanshi"
-exec dex --autostart --environment sway
 

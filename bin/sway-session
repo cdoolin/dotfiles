@@ -12,12 +12,14 @@ case ":$XDG_DATA_DIRS:" in
     *) export XDG_DATA_DIRS="$XDG_DATA_DIRS:/var/lib/snapd/desktop" ;;
 esac
 
-# Portals can outlive Sway and retain the previous display connection.
-# Let desktop apps activate fresh instances after Sway imports its environment.
-systemctl --user stop \
-    xdg-desktop-portal.service \
-    xdg-desktop-portal-gtk.service \
-    xdg-desktop-portal-wlr.service
+# Stop the broker first so it cannot reactivate backends during shutdown.
+stop_portals() {
+    systemctl --user stop xdg-desktop-portal.service
+    systemctl --user stop \
+        xdg-desktop-portal-gtk.service \
+        xdg-desktop-portal-wlr.service
+}
+stop_portals
 
 systemctl --user start \
     pipewire.socket \
@@ -25,4 +27,6 @@ systemctl --user start \
     pipewire-pulse.socket \
     wireplumber.service
 
-exec sway "$@"
+# Return here on normal Sway exit to clean up this session's portals.
+trap 'stop_portals || true' EXIT
+sway "$@"
