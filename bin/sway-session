@@ -5,6 +5,13 @@ export XDG_CURRENT_DESKTOP=sway
 export XDG_SESSION_DESKTOP=sway
 export XDG_SESSION_TYPE=wayland
 
+# Console shells may not source snapd's /etc/profile.d setup.
+export XDG_DATA_DIRS="${XDG_DATA_DIRS:-/usr/local/share:/usr/share}"
+case ":$XDG_DATA_DIRS:" in
+    *:/var/lib/snapd/desktop:*) ;;
+    *) export XDG_DATA_DIRS="$XDG_DATA_DIRS:/var/lib/snapd/desktop" ;;
+esac
+
 # Portals can outlive Sway and retain the previous display connection.
 # Let desktop apps activate fresh instances after Sway imports its environment.
 systemctl --user stop \
