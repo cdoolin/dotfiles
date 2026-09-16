@@ -1,0 +1,14 @@
+# Match the font family and point size used in Foot.
+font-family = UbuntuMono Nerd Font
+font-size = 14
+
+# Follow the desktop's light/dark appearance preference.
+# Browse alternatives with: ghostty +list-themes
+theme = light:Pencil Light,dark:Pencil Dark
+
+# Reload after editing with Ctrl+Shift+Comma.
+
+# Use a steady block cursor, including at the shell prompt.
+cursor-style = block
+cursor-style-blink = false
+# shell-integration-features = no-cursor

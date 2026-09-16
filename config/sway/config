@@ -43,10 +43,13 @@ bindsym XF86MonBrightnessDown exec brightnessctl s 5%-
 bindsym XF86MonBrightnessUp exec brightnessctl s +5%
 bindsym Print exec ~/bin/wl-screenshot
 
-set $term foot
+# set $term foot
+set $term ghostty
 
-# Terminal
-bindsym $mod+Return exec $term
+# Terminal: use D-Bus activation for fast Ghostty windows.
+# To switch back to Foot, swap $term above and use the commented binding.
+# bindsym $mod+Return exec $term
+bindsym $mod+Return exec $term +new-window
 
 # Kill focused window
 bindsym $mod+Shift+q kill
