@@ -5,6 +5,13 @@ export XDG_CURRENT_DESKTOP=sway
 export XDG_SESSION_DESKTOP=sway
 export XDG_SESSION_TYPE=wayland
 
+# Portals can outlive Sway and retain the previous display connection.
+# Let desktop apps activate fresh instances after Sway imports its environment.
+systemctl --user stop \
+    xdg-desktop-portal.service \
+    xdg-desktop-portal-gtk.service \
+    xdg-desktop-portal-wlr.service
+
 systemctl --user start \
     pipewire.socket \
     pipewire.service \
