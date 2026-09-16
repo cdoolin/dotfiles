@@ -10,7 +10,7 @@ dbus-update-activation-environment --systemd \
 systemctl --user stop xdg-desktop-portal.service
 systemctl --user reset-failed \
     xdg-desktop-portal-gtk.service \
-    xdg-desktop-portal-wlr.service
+    xdg-desktop-portal-wlr.service 2>/dev/null || true
 systemctl --user restart \
     xdg-desktop-portal-gtk.service \
     xdg-desktop-portal-wlr.service
