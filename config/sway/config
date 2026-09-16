@@ -51,6 +51,9 @@ set $term ghostty
 # bindsym $mod+Return exec $term
 bindsym $mod+Return exec $term +new-window
 
+# Open a terminal when the session starts.
+exec $term +new-window
+
 # Kill focused window
 bindsym $mod+Shift+q kill
 

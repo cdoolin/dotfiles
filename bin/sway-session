@@ -1,0 +1,14 @@
+#!/bin/sh
+set -eu
+
+export XDG_CURRENT_DESKTOP=sway
+export XDG_SESSION_DESKTOP=sway
+export XDG_SESSION_TYPE=wayland
+
+systemctl --user start \
+    pipewire.socket \
+    pipewire.service \
+    pipewire-pulse.socket \
+    wireplumber.service
+
+exec sway "$@"
