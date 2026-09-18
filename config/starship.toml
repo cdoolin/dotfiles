@@ -1,5 +1,8 @@
 # Get editor completions based on the config schema
 "$schema" = 'https://starship.rs/config-schema.json'
 
+# Avoid scanning symlink targets, including network shares.
+follow_symlinks = false
+
 [gcloud]
 disabled = true

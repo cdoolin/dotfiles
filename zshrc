@@ -56,7 +56,7 @@ if [ -d  ~/.fly ]; then
 fi
 
 if which fnm > /dev/null; then
-    eval "$(fnm env --use-on-cd)"
+    eval "$(fnm env --use-on-cd --shell zsh)"
 elif [ -f ~/.nvm/nvm.sh ]; then
     source ~/.nvm/nvm.sh
     source ~/.nvm/bash_completion
